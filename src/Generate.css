@@ -1,0 +1,144 @@
+.result-gen {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    letter-spacing: 1px;
+    width: 400px;
+    margin: auto;
+
+}
+
+.password {
+    font-size: 27px;
+    word-wrap: break-word;
+    max-width: calc(100% - 40px);
+}
+
+.gen {
+    width: 35px;
+    height: 32px;
+    padding: 5px;
+    margin-left: 10px;
+    font-size: 17px;
+}
+
+
+.setting {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+}
+
+
+
+.num {
+    width: 50px;
+    height: 30px;
+}
+
+.p-length,
+.include {
+    color: black;
+    font-size: 17px;
+
+}
+
+.gen:hover {
+    outline: green;
+    border-color: #9ecaed;
+    box-shadow: 0 0 10px #9ecaed;
+    border: green;
+}
+
+.copy {
+    margin-top: 27px;
+    width: 120px;
+    height: 30px;
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    background-color: #5cb85c;
+    border-radius: 3px;
+    border: white;
+}
+
+.line {
+    width: 350px;
+    margin: auto;
+    height: 1px;
+    background-color: rgb(129, 125, 125);
+}
+
+.copy:hover {
+    background-color: #5ad15a;
+    box-shadow: 0 0 10px #8cda8c;
+
+}
+
+#searching input {
+    width: 350px;
+    height: 40px;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 25px;
+    border: 0;
+    background: #eee;
+    font-size: 17px;
+    transition: all 0.5s;
+    color: black;
+}
+
+#searching input:focus {
+    outline: none;
+
+}
+
+.hostname {
+    display: flex;
+    float: left;
+    position: absolute;
+    padding-top: 37px;
+    padding-left: 70px;
+    margin-left: 25px;
+    font-size: 15px;
+}
+
+.domain {
+    display: flex;
+    float: left;
+    position: absolute;
+    padding-top: 37px;
+    padding-left: 70px;
+    margin-left: 25px;
+    font-size: 15px;
+
+
+}
+
+.avatar {
+    float: left;
+    padding: 10px;
+    margin-top: 15px;
+
+}
+
+.link {
+    display: flex;
+    float: right;
+    padding-top: 47px;
+    padding-left: 70px;
+    margin-left: 15em;
+    color: black;
+
+}
+
+.link:hover {
+    color: rgb(36, 35, 35);
+}
+
+.websites {
+    display: flex;
+}
