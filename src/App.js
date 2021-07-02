@@ -6,8 +6,7 @@ import "./Generate.css";
 import { Alert, Button } from "react-bootstrap";
 import {useState} from "react";
 import { numbers,upperCaseLetters,lowerCaseLetters,specialCharacters} from './Characters';
-import Avatar from "react-avatar";
-
+import axios from "axios";
 
 
 function App() {
@@ -21,8 +20,33 @@ function App() {
   let [alert,setAlert] = useState("");
   let [noField,setNoField] = useState("");
   const [url,setUrl] = useState("");
-  const [hostName,setHostName] = useState("");
+  const [email,setEmail] = useState("");
+
+
+  var options = {
+    method: 'GET',
+    url: 'https://easy-fast-temp-mail.p.rapidapi.com/create',
+    params: {address: 'random', ttl: '3600', public: 'true'},
+    headers: {
+      'x-rapidapi-key': 'd18b5b0c67msh87889490014b135p1add7bjsn6b9c4d5f273c',
+      'x-rapidapi-host': 'easy-fast-temp-mail.p.rapidapi.com',
+      'Access-Control-Allow-Origin': '*'
+
+    }
+  };
+
+const handleEmailGenerate = (e)=>{
+  e.preventDefault();
+  axios.request(options).then((response) => {
+    console.log(response.data.address);
+    const email = response.data.address;
+    return setEmail(email)
+  }).catch((error)=> {
+    console.error(error.message);
+  });
   
+}
+
   // Handle Generate Password
 
   const handleGeneratePasword = () =>{
@@ -45,7 +69,6 @@ function App() {
       }
 
       setPassword(createPassword(characterList));
-      console.log(password);
       setAlert("");
       setNoField("");
       setError("");
@@ -84,11 +107,19 @@ function App() {
       chrome.tabs && chrome.tabs.query(queryInfo, tabs => {
           const url = tabs[0].url;
           setUrl(url);
-          const hostName = url.hostname;
-          setHostName(hostName)
 
       });
 
+
+    }
+
+    const copyToClipEmail = () => {
+      const newTextArea = document.createElement('textarea')
+      newTextArea.innerText = email
+      document.body.appendChild(newTextArea)
+      newTextArea.select()
+      document.execCommand('copy')
+      newTextArea.remove();
 
     }
 
@@ -111,6 +142,27 @@ function App() {
       }
     }
 
+
+  const handleCopyEmail = () =>{
+    if (email === '') {
+          
+      console.log("There was an error");
+  } else {
+    copyToClipEmail();
+    console.log(url)
+    try{
+      alert = "email copied";
+      setAlert(alert)
+      console.log("email copied succesfully");
+
+    }
+    catch(error){
+        setError(error)
+    }
+  }
+}
+  
+
     window.onload = async ()=>{
         await handleGeneratePasword();
     }
@@ -124,7 +176,7 @@ function App() {
 			<label className="label-tabs" id="tab1" for="tab1"><i className="fa fa-random"></i><span>Generate</span></label>
 
 			<input className="tabs" id="tab2" type="radio" name="tabs" />
-			<label className="label-tabs" id="tab2" for="tab2"><i className="fa fa-globe"></i><span>Websites</span></label>
+			<label className="label-tabs" id="tab2" for="tab2"><i className="fa fa-globe"></i><span>Emails</span></label>
 
 			<section id="content1" className="tab-content">
 				{/* <Generate /> */}
@@ -163,8 +215,7 @@ function App() {
 			<input onChange={(e) => setIncludeSymbols(e.target.checked)} type="checkbox" id="symbols" checked={includeSymbols}   />
 		</div>
             </div>
-            <h6>{url}</h6>    
-            <h6>{hostName}</h6>            
+          
         </div>
         <br />
         <h5>Copyright &copy; Abdul Wahab </h5>
@@ -172,29 +223,19 @@ function App() {
 			</section>
 
 			<section id="content2" className="tab-content">
-      <div id="search">
-    <form name="search" id="searching" method="post" action="">
-        <input autoComplete="off" class="gSearch" type="search" size="60" placeholder="Search Websites..." onfocus="" name="search" />
-
-    </form>
-</div>
-    <div className="websites">
-      <Avatar className="avatar" round="50px" size="50" name="Google" />
-        <h5 className="hostname">Password : §OMDMYQ|OYet9I</h5>
-        <a target="_blank" className="domain" href="www.google.com">www.google.com</a>
-        <a style={{fontSize:"14px"}} className="link" href="www.google.com">Copy</a>
-    </div>
-
     <br />
+    <div className="generate">
+            <div className="result-gen">
+            <h5>Click to Generate an Email</h5>
+            <h6 style={{fontSize:"20px"}} className="password">{email}</h6>
+            <button onClick={handleEmailGenerate} className="gen"><i className="fa fa-refresh"></i></button>
 
-    <div className="websites">
-      <Avatar className="avatar" round="50px" size="50" name="Canvas" />
-        <h5 className="hostname">Password : RGY§x'EyjPMe0,</h5>
-        <a  href="#" className="domain" >www.ashesi.instructure.com</a>
-        <a style={{fontSize:"14px"}} href="#"  className="link" >Copy</a>
+            </div>
+            <Button onClick={handleCopyEmail} className="copy" variant="success">Copy</Button>
+            {error && <Alert style={{fontSize:"20px"}}>Failed to copy</Alert>}
+            {alert && <Alert style={{fontSize:"20px"}}>Copied to Clipboard</Alert>}
     </div>
-    <br />
-		     
+  
 	</section>
 
          

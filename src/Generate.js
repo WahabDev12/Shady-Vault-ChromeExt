@@ -162,5 +162,14 @@ const Generate = () => {
         </>
     );
 }
+
+
+    {/* <div className="websites">
+      <Avatar className="avatar" round="50px" size="50" name="Canvas" />
+        <h5 className="hostname">Password : RGY§x'EyjPMe0,</h5>
+        <a  href="#" className="domain" >www.ashesi.instructure.com</a>
+        <a style={{fontSize:"14px"}} href="#"  className="link" >Copy</a>
+    </div>
+    <br /> */}
  
 export default Generate;
